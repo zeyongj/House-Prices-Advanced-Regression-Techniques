@@ -30,3 +30,7 @@ preprocessor = ColumnTransformer(
 X_train = train.drop(['Id', 'SalePrice'], axis=1)
 y_train = train['SalePrice']
 X_test = test.drop(['Id'], axis=1)
+
+# Preprocess the data
+X_train = preprocessor.fit_transform(X_train)
+X_test = preprocessor.transform(X_test)
