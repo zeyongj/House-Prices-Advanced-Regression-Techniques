@@ -27,22 +27,20 @@ The model achieves a mean RMSE score of 0.16487 with a standard deviation of the
 
 ## Execution
 
-The code is in a Jupyter Notebook format and can be run using Google Colab or Jupyter Notebook on your local machine. Make sure you have the required libraries installed and the dataset files available.
+### Via Google Colab
 
-```python
-# Code snippet from the project
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, GridSearchCV, KFold, cross_val_score
-from sklearn.metrics import mean_squared_error
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.linear_model import Lasso
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import MaxAbsScaler
-```
+The code in a Jupyter Notebook format can be run using Google Colab or Jupyter Notebook on your local machine. Make sure you have the required libraries installed and the dataset files available.
+
+
+### Via Python Locally
+1. Install the required libraries:
+   - pandas
+   - numpy
+   - scikit-learn
+2. Load the datasets (`train.csv` and `test.csv`) in the same directory as the code.
+3. Run the provided code to preprocess the data, train the model, and make predictions on the test set.
+4. The predictions will be saved in a `submission.csv` file in the correct format.
+
 
 ## Conclusions, Discussions, and Improvements
 
