@@ -91,3 +91,7 @@ submission = pd.DataFrame({'Id': test['Id'], 'SalePrice': predictions})
 submission.to_csv('submission.csv', index=False)
 
 print("Submission file created.")
+
+"""
+This code includes EDA with data visualization, preprocessing, model stacking using RandomForestRegressor, XGBRegressor, and Lasso as base models, and a Lasso model as the final estimator. The code performs KFold cross-validation and trains the stacking model. Finally, it generates predictions and creates the submission file.
+"""
