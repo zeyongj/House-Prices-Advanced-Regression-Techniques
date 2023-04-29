@@ -34,3 +34,9 @@ X_test = test.drop(['Id'], axis=1)
 # Preprocess the data
 X_train = preprocessor.fit_transform(X_train)
 X_test = preprocessor.transform(X_test)
+
+# Feature scaling
+scaler = MaxAbsScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
