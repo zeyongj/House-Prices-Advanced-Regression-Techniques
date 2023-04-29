@@ -17,3 +17,11 @@ test = pd.read_csv('test.csv')
 # Identify categorical and numerical columns
 categorical_columns = train.select_dtypes(include=['object']).columns
 numerical_columns = train.select_dtypes(exclude=['object']).drop(['Id', 'SalePrice'], axis=1).columns
+
+# Preprocessing
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', SimpleImputer(strategy='mean'), numerical_columns),
+        ('cat', Pipeline(steps=[
+            ('impute', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('onehot', OneHotEncoder(handle_unknown='ignore'))]), categorical_columns)])
