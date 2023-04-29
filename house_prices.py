@@ -13,3 +13,7 @@ from sklearn.preprocessing import MaxAbsScaler
 # Load the data
 train = pd.read_csv('train.csv')
 test = pd.read_csv('test.csv')
+
+# Identify categorical and numerical columns
+categorical_columns = train.select_dtypes(include=['object']).columns
+numerical_columns = train.select_dtypes(exclude=['object']).drop(['Id', 'SalePrice'], axis=1).columns
