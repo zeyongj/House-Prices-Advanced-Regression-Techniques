@@ -25,3 +25,8 @@ preprocessor = ColumnTransformer(
         ('cat', Pipeline(steps=[
             ('impute', SimpleImputer(strategy='constant', fill_value='missing')),
             ('onehot', OneHotEncoder(handle_unknown='ignore'))]), categorical_columns)])
+
+# Prepare the data
+X_train = train.drop(['Id', 'SalePrice'], axis=1)
+y_train = train['SalePrice']
+X_test = test.drop(['Id'], axis=1)
