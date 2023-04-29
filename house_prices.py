@@ -45,3 +45,7 @@ alphas = np.logspace(-5, 1, 100)
 lasso = Lasso(max_iter=10000)
 grid_search = GridSearchCV(estimator=lasso, param_grid=dict(alpha=alphas), scoring='neg_mean_squared_error', cv=5)
 grid_search.fit(X_train, y_train)
+
+# Train a LASSO model with the best alpha value and increased max_iter
+model = Lasso(alpha=grid_search.best_params_['alpha'], max_iter=10000)
+model.fit(X_train, y_train)
