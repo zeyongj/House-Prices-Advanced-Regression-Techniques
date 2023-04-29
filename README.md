@@ -64,4 +64,14 @@ By implementing these improvements, the model's performance in predicting house 
 
 ## License
 
-This project is open-source and available for anyone to use and modify.
+This project is licensed under the MIT License. The MIT License is a permissive open source license that allows for free use, copying, modification, and distribution of the software, as long as the copyright notice and permission notice are included in all copies or substantial portions of the software. This license is suitable for both academic and commercial projects.
+
+## Reference
+
+Howard, A., Devrishi, Phil Culliton, & Guo, Y. (2019). Natural Language Processing with Disaster Tweets. Kaggle. Retrieved from https://kaggle.com/competitions/nlp-getting-started .
+
+## Author
+
+Zeyong Jin
+
+April 29th, 2023
