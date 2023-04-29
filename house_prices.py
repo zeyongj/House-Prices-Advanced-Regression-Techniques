@@ -58,3 +58,6 @@ rmse_scores = np.sqrt(-cross_val_score(model, X_train, y_train, scoring='neg_mea
 print(f"KFold Cross-Validation RMSE scores: {rmse_scores}")
 print(f"Mean RMSE score: {rmse_scores.mean():.2f}")
 print(f"Standard deviation of RMSE scores: {rmse_scores.std():.2f}")
+
+# Generate predictions
+predictions = model.predict(X_test)
