@@ -1,9 +1,13 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, GridSearchCV, KFold, cross_val_score
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import Lasso
+from sklearn.ensemble import RandomForestRegressor, StackingRegressor
+from xgboost import XGBRegressor
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -57,27 +61,30 @@ scaler = MaxAbsScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Grid search for best alpha value
-alphas = np.logspace(-5, 1, 100)
-lasso = Lasso(max_iter=10000)
-grid_search = GridSearchCV(estimator=lasso, param_grid=dict(alpha=alphas), scoring='neg_mean_squared_error', cv=5)
-grid_search.fit(X_train, y_train)
+# Define base models for stacking
+base_models = [
+    ('random_forest', RandomForestRegressor(n_jobs=-1, random_state=42)),
+    ('xgb_regressor', XGBRegressor(n_jobs=-1, random_state=42)),
+    ('lasso', Lasso(max_iter=10000, random_state=42))
+]
 
-# Train a LASSO model with the best alpha value and increased max_iter
-model = Lasso(alpha=grid_search.best_params_['alpha'], max_iter=10000)
-model.fit(X_train, y_train)
+# Set up stacking regressor
+stacking_regressor = StackingRegressor(estimators=base_models, final_estimator=Lasso(max_iter=10000, random_state=42), n_jobs=-1)
 
 # Perform KFold cross-validation
 kf = KFold(n_splits=5, random_state=42, shuffle=True)
-rmse_scores = np.sqrt(-cross_val_score(model, X_train, y_train, scoring='neg_mean_squared_error', cv=kf))
+rmse_scores = np.sqrt(-cross_val_score(stacking_regressor, X_train, y_train, scoring='neg_mean_squared_error', cv=kf))
 
 # Print mean and standard deviation of RMSE scores
 print(f"KFold Cross-Validation RMSE scores: {rmse_scores}")
 print(f"Mean RMSE score: {rmse_scores.mean():.2f}")
 print(f"Standard deviation of RMSE scores: {rmse_scores.std():.2f}")
 
+# Train the stacking model
+stacking_regressor.fit(X_train, y_train)
+
 # Generate predictions
-predictions = model.predict(X_test)
+predictions = stacking_regressor.predict(X_test)
 
 # Create the submission file
 submission = pd.DataFrame({'Id': test['Id'], 'SalePrice': predictions})
