@@ -61,11 +61,12 @@ scaler = MaxAbsScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Grid search for best alpha value
-alphas = np.logspace(-5, 1, 100)
-lasso = Lasso(max_iter=10000)
-grid_search = GridSearchCV(estimator=lasso, param_grid=dict(alpha=alphas), scoring='neg_mean_squared_error', cv=5)
-grid_search.fit(X_train, y_train)
+# Define base models for stacking
+base_models = [
+    ('random_forest', RandomForestRegressor(n_jobs=-1, random_state=42)),
+    ('xgb_regressor', XGBRegressor(n_jobs=-1, random_state=42)),
+    ('lasso', Lasso(max_iter=10000, random_state=42))
+]
 
 # Train a LASSO model with the best alpha value and increased max_iter
 model = Lasso(alpha=grid_search.best_params_['alpha'], max_iter=10000)
