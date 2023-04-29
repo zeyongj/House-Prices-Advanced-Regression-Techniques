@@ -53,3 +53,8 @@ model.fit(X_train, y_train)
 # Perform KFold cross-validation
 kf = KFold(n_splits=5, random_state=42, shuffle=True)
 rmse_scores = np.sqrt(-cross_val_score(model, X_train, y_train, scoring='neg_mean_squared_error', cv=kf))
+
+# Print mean and standard deviation of RMSE scores
+print(f"KFold Cross-Validation RMSE scores: {rmse_scores}")
+print(f"Mean RMSE score: {rmse_scores.mean():.2f}")
+print(f"Standard deviation of RMSE scores: {rmse_scores.std():.2f}")
