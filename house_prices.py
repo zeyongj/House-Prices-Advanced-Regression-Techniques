@@ -68,9 +68,8 @@ base_models = [
     ('lasso', Lasso(max_iter=10000, random_state=42))
 ]
 
-# Train a LASSO model with the best alpha value and increased max_iter
-model = Lasso(alpha=grid_search.best_params_['alpha'], max_iter=10000)
-model.fit(X_train, y_train)
+# Set up stacking regressor
+stacking_regressor = StackingRegressor(estimators=base_models, final_estimator=Lasso(max_iter=10000, random_state=42), n_jobs=-1)
 
 # Perform KFold cross-validation
 kf = KFold(n_splits=5, random_state=42, shuffle=True)
