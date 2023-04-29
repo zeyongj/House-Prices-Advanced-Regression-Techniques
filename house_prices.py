@@ -49,3 +49,7 @@ grid_search.fit(X_train, y_train)
 # Train a LASSO model with the best alpha value and increased max_iter
 model = Lasso(alpha=grid_search.best_params_['alpha'], max_iter=10000)
 model.fit(X_train, y_train)
+
+# Perform KFold cross-validation
+kf = KFold(n_splits=5, random_state=42, shuffle=True)
+rmse_scores = np.sqrt(-cross_val_score(model, X_train, y_train, scoring='neg_mean_squared_error', cv=kf))
