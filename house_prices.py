@@ -9,3 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import MaxAbsScaler
+
+# Load the data
+train = pd.read_csv('train.csv')
+test = pd.read_csv('test.csv')
