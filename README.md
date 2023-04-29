@@ -66,7 +66,7 @@ This project is licensed under the MIT License. The MIT License is a permissive 
 
 ## Reference
 
-Howard, A., Devrishi, Phil Culliton, & Guo, Y. (2019). Natural Language Processing with Disaster Tweets. Kaggle. Retrieved from https://kaggle.com/competitions/nlp-getting-started .
+Anna Montoya, DataCanary. (2016). House Prices - Advanced Regression Techniques. Kaggle. Retrieved from https://kaggle.com/competitions/house-prices-advanced-regression-techniques .
 
 ## Author
 
