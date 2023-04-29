@@ -84,7 +84,7 @@ print(f"Standard deviation of RMSE scores: {rmse_scores.std():.2f}")
 stacking_regressor.fit(X_train, y_train)
 
 # Generate predictions
-predictions = model.predict(X_test)
+predictions = stacking_regressor.predict(X_test)
 
 # Create the submission file
 submission = pd.DataFrame({'Id': test['Id'], 'SalePrice': predictions})
