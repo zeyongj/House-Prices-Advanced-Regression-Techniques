@@ -61,3 +61,9 @@ print(f"Standard deviation of RMSE scores: {rmse_scores.std():.2f}")
 
 # Generate predictions
 predictions = model.predict(X_test)
+
+# Create the submission file
+submission = pd.DataFrame({'Id': test['Id'], 'SalePrice': predictions})
+submission.to_csv('submission.csv', index=False)
+
+print("Submission file created.")
