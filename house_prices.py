@@ -80,6 +80,9 @@ print(f"KFold Cross-Validation RMSE scores: {rmse_scores}")
 print(f"Mean RMSE score: {rmse_scores.mean():.2f}")
 print(f"Standard deviation of RMSE scores: {rmse_scores.std():.2f}")
 
+# Train the stacking model
+stacking_regressor.fit(X_train, y_train)
+
 # Generate predictions
 predictions = model.predict(X_test)
 
