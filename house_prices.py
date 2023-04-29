@@ -14,6 +14,23 @@ from sklearn.preprocessing import MaxAbsScaler
 train = pd.read_csv('train.csv')
 test = pd.read_csv('test.csv')
 
+# EDA
+plt.figure(figsize=(12, 6))
+sns.histplot(train['SalePrice'], kde=True)
+plt.title('Sale Price Distribution')
+plt.show()
+
+plt.figure(figsize=(12, 6))
+sns.scatterplot(x=train['GrLivArea'], y=train['SalePrice'])
+plt.title('Sale Price vs. GrLivArea')
+plt.show()
+
+correlation_matrix = train.corr()
+plt.figure(figsize=(12, 12))
+sns.heatmap(correlation_matrix, cmap='coolwarm', annot=False)
+plt.title('Correlation Matrix')
+plt.show()
+
 # Identify categorical and numerical columns
 categorical_columns = train.select_dtypes(include=['object']).columns
 numerical_columns = train.select_dtypes(exclude=['object']).drop(['Id', 'SalePrice'], axis=1).columns
